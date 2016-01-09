@@ -52,6 +52,227 @@ select_move(Board, 2, Player, 1, NewBoard) :-
     change_board(Board, 0, Val, Player, Board1),
     change_board(Board1, 0, NVal, Player, NewBoard).
 
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %    X                 XX          %
+  %    XX   XXX    XX    XXX         %
+  %    XX   XX     XX                %
+  %                X                 %
+  %                                  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+select_move(Board, 13, Player, 1, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX, CoordY - 1, NVal),
+  convertToVal(CoordX + 1, CoordY, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 13, Player, 2, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY, NVal),
+  convertToVal(CoordX + 1, CoordY, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX - 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 13, Player, 3, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX, CoordY - 1, NVal),
+  convertToVal(CoordX + 1, CoordY - 1, NVal2),
+  convertToVal(CoordX + 1, CoordY , NVal3),
+  convertToVal(CoordX, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 13, Player, 4, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX , CoordY - 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %    XX                X X         %
+  %     X   XXX    XX    XXX         %
+  %    XX   X X    X                 %
+  %                XX                %
+  %                                  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+select_move(Board, 14, Player, 1, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
+  convertToVal(CoordX, CoordY - 1, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX - 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 14, Player, 2, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 1, CoordY - 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 14, Player, 3, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX + 1, CoordY - 1, NVal),
+  convertToVal(CoordX, CoordY - 1, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 14, Player, 4, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY + 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %    X                   X         %
+  %    XX   XXXX     X    XXXX       %
+  %    X      X      X               %
+  %    X            XX               %
+  %                  X               %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+select_move(Board, 15, Player, 1, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX, CoordY - 1, NVal),
+  convertToVal(CoordX + 1, CoordY, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX, CoordY + 2, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 15, Player, 2, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 2, CoordY, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX + 1, CoordY , NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 15, Player, 3, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX , CoordY - 2, NVal),
+  convertToVal(CoordX , CoordY - 1, NVal2),
+  convertToVal(CoordX - 1, CoordY, NVal3),
+  convertToVal(CoordX, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 15, Player, 4, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY, NVal),
+  convertToVal(CoordX , CoordY - 1, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 2, CoordY, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
 %%%%%%%%%%%%%%%%%%%%
 % piece pentaminos %
 %                  %
@@ -274,8 +495,6 @@ select_move(Board, 18, Player, 4, NewBoard) :-
   change_board(Board3, 0, NVal3, Player, Board4),
   change_board(Board4, 0, NVal4, Player, NewBoard).
 
-
-
   %%%%%%%%%%%%%%%%%%%
   %                 %
   %    X            %
@@ -286,16 +505,32 @@ select_move(Board, 18, Player, 4, NewBoard) :-
   %%%%%%%%%%%%%%%%%%%
 
 
-select_move(Board, 18, Player, 4, NewBoard) :-
+select_move(Board, 19, Player, 1, NewBoard) :-
   write("CoordX : "),
   read(CoordX),
   write("CoordY : "),
   read(CoordY),
   convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX + 1, CoordY - 1, NVal),
-  convertToVal(CoordX , CoordY - 1, NVal2),
-  convertToVal(CoordX - 1, CoordY, NVal3),
-  convertToVal(CoordX - 1, CoordY + 1, NVal4),
+  convertToVal(CoordX - 2, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 2, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 19, Player, 3, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 2, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 2, CoordY + 1, NVal4),
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),
   change_board(Board2, 0, NVal2, Player, Board3),
@@ -303,7 +538,66 @@ select_move(Board, 18, Player, 4, NewBoard) :-
   change_board(Board4, 0, NVal4, Player, NewBoard).
 
 
-select_move(Board, 18, Player, 4, NewBoard) :-
+select_move(Board, 19, Player, 2, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX + 1, CoordY - 2, NVal),
+  convertToVal(CoordX , CoordY - 1, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX - 1, CoordY + 2, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 19, Player, 4, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX + 1, CoordY - 2, NVal),
+  convertToVal(CoordX , CoordY - 1, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
+  convertToVal(CoordX - 1, CoordY + 2, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %    X                   X         %
+  %    XXX    XX           XX        %
+  %     X    XX     X     XX         %
+  %           X    XXX               %
+  %                  X               %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+select_move(Board, 20, Player, 1, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 2, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 20, Player, 2, NewBoard) :-
   write("CoordX : "),
   read(CoordX),
   write("CoordY : "),
@@ -312,6 +606,38 @@ select_move(Board, 18, Player, 4, NewBoard) :-
   convertToVal(CoordX + 1, CoordY - 1, NVal),
   convertToVal(CoordX , CoordY - 1, NVal2),
   convertToVal(CoordX - 1, CoordY, NVal3),
+  convertToVal(CoordX , CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 20, Player, 3, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX - 1, CoordY, NVal),
+  convertToVal(CoordX , CoordY - 1, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+  change_board(Board, 0, Val, Player, Board1),
+  change_board(Board1, 0, NVal, Player, Board2),
+  change_board(Board2, 0, NVal2, Player, Board3),
+  change_board(Board3, 0, NVal3, Player, Board4),
+  change_board(Board4, 0, NVal4, Player, NewBoard).
+
+select_move(Board, 20, Player, 4, NewBoard) :-
+  write("CoordX : "),
+  read(CoordX),
+  write("CoordY : "),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX, CoordY - 1, NVal),
+  convertToVal(CoordX + 1, CoordY, NVal2),
+  convertToVal(CoordX, CoordY + 1, NVal3),
   convertToVal(CoordX - 1, CoordY + 1, NVal4),
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),

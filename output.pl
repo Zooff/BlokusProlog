@@ -28,11 +28,11 @@ draw_board(Board):-
 
 
 start_line :-
-  write('- - - A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T'),
+  write('- - - A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T -'),
   nl.
 
 print_line :-
-  write('--------------------------------------------'),
+  write('-------------------------------------------------------------------------------------'),
   nl.
 
 print_case(_, 21) :- !.
@@ -53,7 +53,7 @@ print_all_col(Board, Indice, 21) :-
 print_all_col([X|L], Indice, Col) :-
   Col < 21,
   X == e,
-  ansi_format(fg(white), ' ~w', [X]),
+  ansi_format(fg(white), '~w', [X]),
   write(' - '),
   NCol is Col +1,
   print_all_col(L,Indice, NCol).
@@ -61,7 +61,7 @@ print_all_col([X|L], Indice, Col) :-
 print_all_col([X|L], Indice, Col) :-
   Col < 21,
   X == o,
-  ansi_format(fg(cyan), ' ~w', [X]),
+  ansi_format(fg(cyan), '~w', [X]),
   write(' - '),
   NCol is Col +1,
   print_all_col(L,Indice, NCol).
@@ -69,7 +69,7 @@ print_all_col([X|L], Indice, Col) :-
 print_all_col([X|L], Indice, Col) :-
   Col < 21,
   X == x,
-  ansi_format(fg(red), ' ~w', [X]),
+  ansi_format(fg(red), '~w', [X]),
   write(' - '),
   NCol is Col +1,
   print_all_col(L,Indice, NCol).
