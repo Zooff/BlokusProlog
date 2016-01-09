@@ -16,7 +16,15 @@ select_move(Board, 1,  Player, Rotation, NewBoard) :-
       read(CoordY),
       nl,
       convertToVal(CoordX, CoordY, Val),
+      convertToVal(CoordX + 1, CoordY, NVal),
+      convertToVal(CoordX - 1, CoordY, NVal1),
+      convertToVal(CoordX, CoordY + 1, NVal2),
+      convertToVal(CoordX, CoordY - 1, NVal3),
     %  verify_move(Board ,Nval, Player),
+      verify_case(Board, NVal, Player),
+      verify_case(Board, NVal1, Player),
+      verify_case(Board, NVal2, Player),
+      verify_case(Board, NVal3, Player),
       change_board(Board, 0, Val, Player, NewBoard).
 
 
@@ -685,6 +693,17 @@ convertToVal(X, Y, Val) :-
   NVal is Y * 20,
   Val is NVal + X.
 
+% Verify that the case is not a player case %
+
+verify_case(Board, Val, Player) :-
+  verify_case(Board, 0, Val, Player).
+
+verify_case([H|_], Val, Val, Player) :-
+  H \= Player.
+verify_case([H|R], Count, Val, Player) :-
+  Count < Val,
+  NCount is Count + 1,
+  verify_case(R, NCount, Val, Player).
 
 % Change one point of the board %
 
