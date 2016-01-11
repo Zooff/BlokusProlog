@@ -7,25 +7,27 @@
 % Piece monimo : X %
 %%%%%%%%%%%%%%%%%%%%
 
-select_move(Board, 1,  Player, Rotation, NewBoard) :-
+select_move(Board, 1,  Player, _, NewBoard) :-
 
-      write("CoordX : "),
-      read(CoordX),
-      nl,
-      write("CoordY : "),
-      read(CoordY),
-      nl,
-      convertToVal(CoordX, CoordY, Val),
-      convertToVal(CoordX + 1, CoordY, NVal),
-      convertToVal(CoordX - 1, CoordY, NVal1),
-      convertToVal(CoordX, CoordY + 1, NVal2),
-      convertToVal(CoordX, CoordY - 1, NVal3),
-    %  verify_move(Board ,Nval, Player),
-      verify_case(Board, NVal, Player),
-      verify_case(Board, NVal1, Player),
-      verify_case(Board, NVal2, Player),
-      verify_case(Board, NVal3, Player),
-      change_board(Board, 0, Val, Player, NewBoard).
+  write('CoordX : '),
+  read(CoordX),
+  write('CoordY : '),
+  read(CoordY),
+  convertToVal(CoordX, CoordY, Val),
+
+  (Val - 14 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write(0) ),
+  (Val + 14 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write(0) ),
+  (Val - 1 >= 0 -> verif_move(Board, 0, Val - 1, Player) ; write(0) ),
+  (Val + 1 < 196 -> verif_move(Board, 0, Val + 1, Player) ; write(0) ),
+
+  ( (Val \= 60 , Val \= 135 ) ->
+    ( verif_move2(Board, 0, Val - 15, Player) ;
+      verif_move2(Board, 0, Val - 13, Player) ;
+      verif_move2(Board, 0, Val + 15, Player) ;
+      verif_move2(Board, 0, Val + 13, Player) )
+    ; writeln(no) ),
+
+  change_board(Board, 0, Val, Player, NewBoard).
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -79,7 +81,26 @@ select_move(Board, 13, Player, 1, NewBoard) :-
   convertToVal(CoordX, CoordY - 1, NVal),
   convertToVal(CoordX + 1, CoordY, NVal2),
   convertToVal(CoordX, CoordY + 1, NVal3),
-  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+  convertToVal(CoordX -1, CoordY, Case),
+  convertToVal(CoordX - 1, CoordY - 1, Case1),
+  convertToVal(CoordX , CoordY + 2, Case2),
+  convertToVal(CoordX + 1, CoordY + 2, Case3),
+  convertToVal(CoordX + 2, CoordY , Case4),
+  convertToVal(CoordX + 2, CoordY + 1, Case5),
+  convertToVal(CoordX + 1, CoordY + 2, Case6),
+  convertToVal(CoordX, CoordY + 2, Case7),
+  convertToVal(CoordX - 1, CoordY + 1, Case8),
+  convertToVal(CoordX + 1, CoordY + 1, Case9),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+  verify_case(Board, Case, Player),
+
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),
   change_board(Board2, 0, NVal2, Player, Board3),
@@ -523,28 +544,33 @@ select_move(Board, 19, Player, 1, NewBoard) :-
   convertToVal(CoordX - 1, CoordY, NVal2),
   convertToVal(CoordX + 1, CoordY, NVal3),
   convertToVal(CoordX + 2, CoordY + 1, NVal4),
+
+  (Val - 14 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write(0) ),
+  (Val + 14 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write(0) ),
+  (Val - 2 >= 0 -> verif_move(Board, 0, Val - 2, Player) ; write(0) ),
+  (Val + 2 < 196 -> verif_move(Board, 0, Val + 2, Player) ; write(0) ),
+  (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write(0) ),
+  (Val - 14 - 2 < 196 ->  verif_move(Board, 0, Val - 14 - 2, Player) ; write(0) ),
+  (Val + 14 - 1 >= 0 -> verif_move(Board, 0, Val + 14 - 1, Player) ; write(0) ),
+  (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write(0) ),
+  (Val + 14 + 2 < 196 -> verif_move(Board, 0, Val + 14 + 2, Player) ; write(0) ),
+  (Val - 14 + 1 >= 0 -> verif_move(Board, 0, Val - 14 + 1, Player) ; write(0) ),
+
+  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 45, Val \= 75, Val \= 135, Val \= 134, Val \= 136, Val \= 120, Val \= 150) ->
+    ( verif_move2(Board, 0, Val - 26, Player) ;
+      verif_move2(Board, 0, Val - 28, Player) ;
+      verif_move2(Board, 0, Val + 26, Player) ;
+      verif_move2(Board, 0, Val + 28, Player) ;
+      verif_move2(Board, 0, Val - 12, Player) ;
+      verif_move2(Board, 0, Val + 12, Player) )
+    ; writeln(no) ),
+
+
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),
   change_board(Board2, 0, NVal2, Player, Board3),
   change_board(Board3, 0, NVal3, Player, Board4),
   change_board(Board4, 0, NVal4, Player, NewBoard).
-
-select_move(Board, 19, Player, 3, NewBoard) :-
-  write("CoordX : "),
-  read(CoordX),
-  write("CoordY : "),
-  read(CoordY),
-  convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX - 2, CoordY - 1, NVal),
-  convertToVal(CoordX - 1, CoordY, NVal2),
-  convertToVal(CoordX + 1, CoordY, NVal3),
-  convertToVal(CoordX + 2, CoordY + 1, NVal4),
-  change_board(Board, 0, Val, Player, Board1),
-  change_board(Board1, 0, NVal, Player, Board2),
-  change_board(Board2, 0, NVal2, Player, Board3),
-  change_board(Board3, 0, NVal3, Player, Board4),
-  change_board(Board4, 0, NVal4, Player, NewBoard).
-
 
 select_move(Board, 19, Player, 2, NewBoard) :-
   write("CoordX : "),
@@ -552,31 +578,44 @@ select_move(Board, 19, Player, 2, NewBoard) :-
   write("CoordY : "),
   read(CoordY),
   convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX + 1, CoordY - 2, NVal),
-  convertToVal(CoordX , CoordY - 1, NVal2),
-  convertToVal(CoordX, CoordY + 1, NVal3),
-  convertToVal(CoordX - 1, CoordY + 2, NVal4),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY, NVal2),
+  convertToVal(CoordX + 1, CoordY, NVal3),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
+
+
+  (Val - 28 >= 0 -> verif_move(Board, 0, Val - 28, Player) ; write(0) ),
+  (Val + 28 < 196 ->  verif_move(Board, 0, Val + 28, Player) ; write(0) ),
+  (Val - 1 >= 0 -> verif_move(Board, 0, Val - 1, Player) ; write(0) ),
+  (Val + 1 < 196 -> verif_move(Board, 0, Val + 1, Player) ; write(0) ),
+  (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write(0) ),
+  (Val - 14 + 2 < 196 ->  verif_move(Board, 0, Val - 14 + 2, Player) ; write(0) ),
+  (Val + 14 - 2 >= 0 -> verif_move(Board, 0, Val + 14 - 2, Player) ; write(0) ),
+  (Val + 28 - 1 < 196 -> verif_move(Board, 0, Val + 28 - 1, Player) ; write(0) ),
+  (Val + 14 + 1 < 196 -> verif_move(Board, 0, Val + 14 + 1, Player) ; write(0) ),
+  (Val - 14 - 1 >= 0 -> verif_move(Board, 0, Val - 14 - 1, Player) ; write(0) ),
+
+  ( (Val \= 60, Val \= 46, Val \= 74, Val \= 47, Val \= 73, Val \= 135, Val \= 149, Val \= 121, Val \= 122, Val \= 148) ->
+    ( verif_move2(Board, 0, Val - 27, Player) ;
+      verif_move2(Board, 0, Val - 30, Player) ;
+      verif_move2(Board, 0, Val + 2, Player) ;
+      verif_move2(Board, 0, Val + 29, Player) ;
+      verif_move2(Board, 0, Val + 26, Player) ;
+      verif_move2(Board, 0, Val - 2, Player) )
+    ; writeln(no) ),
+
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),
   change_board(Board2, 0, NVal2, Player, Board3),
   change_board(Board3, 0, NVal3, Player, Board4),
   change_board(Board4, 0, NVal4, Player, NewBoard).
 
+
+select_move(Board, 19, Player, 3, NewBoard) :-
+  select_move(Board, 19, Player, 1, NewBoard).
+
 select_move(Board, 19, Player, 4, NewBoard) :-
-  write("CoordX : "),
-  read(CoordX),
-  write("CoordY : "),
-  read(CoordY),
-  convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX + 1, CoordY - 2, NVal),
-  convertToVal(CoordX , CoordY - 1, NVal2),
-  convertToVal(CoordX, CoordY + 1, NVal3),
-  convertToVal(CoordX - 1, CoordY + 2, NVal4),
-  change_board(Board, 0, Val, Player, Board1),
-  change_board(Board1, 0, NVal, Player, Board2),
-  change_board(Board2, 0, NVal2, Player, Board3),
-  change_board(Board3, 0, NVal3, Player, Board4),
-  change_board(Board4, 0, NVal4, Player, NewBoard).
+  select_move(Board, 19, Player, 2, NewBoard).
 
 
 
@@ -671,6 +710,27 @@ select_move(Board, 21, Player, Rotation, NewBoard) :-
   convertToVal(CoordX - 1, CoordY, NVal2),
   convertToVal(CoordX, CoordY + 1, NVal3),
   convertToVal(CoordX, CoordY - 1, NVal4),
+
+  (Val - 28 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write(0) ),
+  (Val + 28 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write(0) ),
+  (Val - 2 >= 0 -> verif_move(Board, 0, Val - 2, Player) ; write(0) ),
+  (Val + 2 < 196 -> verif_move(Board, 0, Val + 2, Player) ; write(0) ),
+  (Val - 14 - 1 >= 0 -> verif_move(Board, 0, Val - 14 - 1, Player) ; write(0) ),
+  (Val + 14 + 1 < 196 ->  verif_move(Board, 0, Val + 14 + 1, Player) ; write(0) ),
+  (Val + 14 - 1 >= 0 -> verif_move(Board, 0, Val + 14 - 1, Player) ; write(0) ),
+  (Val - 14 + 1 < 196 -> verif_move(Board, 0, Val - 14 + 1, Player) ; write(0) ),
+
+  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 46, Val \= 74, Val \= 135, Val \= 134, Val \= 136, Val \= 121, Val \= 149) ->
+    ( verif_move2(Board, 0, Val - 27, Player) ;
+      verif_move2(Board, 0, Val - 29, Player) ;
+      verif_move2(Board, 0, Val + 27, Player) ;
+      verif_move2(Board, 0, Val + 29, Player) ;
+      verif_move2(Board, 0, Val - 16, Player) ;
+      verif_move2(Board, 0, Val - 12, Player) ;
+      verif_move2(Board, 0, Val + 16, Player) ;
+      verif_move2(Board, 0, Val + 12, Player) )
+    ; writeln(no) ),
+
   change_board(Board, 0, Val, Player, Board1),
   change_board(Board1, 0, NVal, Player, Board2),
   change_board(Board2, 0, NVal2, Player, Board3),
@@ -688,22 +748,31 @@ verify_move(Board, Val).
 convertToVal(X, Y, Val) :-
   X >= 0,
   Y >= 0,
-  Y < 20,
-  X < 20,
-  NVal is Y * 20,
+  Y < 14,
+  X < 14,
+  NVal is Y * 14,
   Val is NVal + X.
 
 % Verify that the case is not a player case %
 
-verify_case(Board, Val, Player) :-
-  verify_case(Board, 0, Val, Player).
-
-verify_case([H|_], Val, Val, Player) :-
-  H \= Player.
-verify_case([H|R], Count, Val, Player) :-
-  Count < Val,
+verif_move([_|R], Count, Val, Player) :-
+  Count < Val, !,
   NCount is Count + 1,
-  verify_case(R, NCount, Val, Player).
+  verif_move(R, NCount, Val, Player).
+verif_move([H|_], _, _, Player) :-
+  %write(H),nl,
+  H \= Player.
+
+ % Verify that the case is a player case %
+
+verif_move2([_|R], Count, Val, Player) :-
+  Count < Val, !,
+  NCount is Count + 1,
+  verif_move2(R, NCount, Val, Player).
+verif_move2([H|_], _, _, Player) :-
+  %writeln(H),
+  H = Player.
+
 
 % Change one point of the board %
 

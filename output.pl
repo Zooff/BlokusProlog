@@ -12,12 +12,7 @@ lettertochiffre(11,'K').
 lettertochiffre(12,'L').
 lettertochiffre(13,'M').
 lettertochiffre(14,'N').
-lettertochiffre(15,'O').
-lettertochiffre(16,'P').
-lettertochiffre(17,'Q').
-lettertochiffre(18,'R').
-lettertochiffre(19,'S').
-lettertochiffre(20,'T').
+
 
 
 draw_board(Board):-
@@ -28,14 +23,14 @@ draw_board(Board):-
 
 
 start_line :-
-  write('- - - A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T -'),
+  write('- - - A - B - C - D - E - F - G - H - I - J - K - L - M - N -'),
   nl.
 
 print_line :-
-  write('-------------------------------------------------------------------------------------'),
+  write('-------------------------------------------------------------'),
   nl.
 
-print_case(_, 21) :- !.
+print_case(_, 15) :- !.
 
 print_case(Board, Indice) :-
   write('- '),
@@ -44,7 +39,7 @@ print_case(Board, Indice) :-
   write(' - '),
   print_all_col(Board, Indice, 1).
 
-print_all_col(Board, Indice, 21) :-
+print_all_col(Board, Indice, 15) :-
   nl,
   print_line,
   NIndice is Indice + 1,
