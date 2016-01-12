@@ -2,11 +2,11 @@ init :-
   consult('piece.pl'),
   consult('output.pl').
 
-blokus :-
+blokus(Ai) :-
   initialize(Board),
   list(JList),
   list(JList2),
-  play_blo(Board, x, JList, JList2).
+  play_blo(Board, x, JList, JList2, Ai).
 
 initialize(Board) :-
   create_board(196, Board).
@@ -20,17 +20,13 @@ create_board(Size, [e|List]):-
 
 % Recursive predicate that implement player turn %
 
-play_blo(Board, Player, J1List, J2List) :-
+play_blo(Board, Player, J1List, J2List, Ai) :-
   draw_board(Board),
 
   (Player == x ->
     p(Board, 0, Player, J1List, [], Li), write(Li);
-    p(Board, 0, Player, J2List, [], Li)
+    p(Board, 0, Player, J2List, [], Li), write(Li)
   ),
-
-  %(L == [] -> write('End Game'); write('Continue')),
-  %nl,
-
   repeat,
   (Player == x ->
     write('Piece Restante J1 : '), write(J1List);
@@ -72,7 +68,39 @@ play_blo(Board, Player, J1List, J2List) :-
   invert_player(Player, Player2),
 
   % Launch the other player turn
-  play_blo(NewBoard, Player2, NewJ1List, NewJ2List).
+  (Ai == 1 ->
+    ai_move(NewBoard,Player2, NewJ1List, NewJ2List, Ai);
+    play_blo(NewBoard, Player2, NewJ1List, NewJ2List, Ai)
+  ).
+
+ai_move(Board, Player, J1List, J2List, Ai) :-
+
+  draw_board(Board),
+
+  (Player == x ->
+    p(Board, 0, Player, J1List, [], Li);
+    p(Board, 0, Player, J2List, [], Li)
+  ),
+
+  (Player == x ->
+    first_elem(Piece, J1List);
+    first_elem(Piece, J2List)
+  ),
+
+%%%%%%%%%% BUG ICI %%%%%%%%%
+
+  first_elem(K, Li),
+
+%  select_move(Board, Piece, X, Y, Player, Rot, NewBoard),
+
+  ( Player == x ->
+      delete_piece(Piece, J1List, NewJ1List), NewJ2List = J2List;
+      delete_piece(Piece, J2List, NewJ2List), NewJ1List = J1List
+  ),
+  invert_player(Player, Player2),
+  play_blo(NewBoard, Player2, NewJ1List, NewJ2List, Ai).
+
+
 
 %play_blo(Board, Player, J1List, J2List) :-
 %  gameover(J1List, J2List),
@@ -95,31 +123,19 @@ delete_piece(Piece, [H1, H2|R], [H1|List]) :-
 invert_player(x, o).
 invert_player(o,x).
 
+% Say if the piece is in the list of piece %
+
 piece_in_list(Piece, [Piece|_]).
 piece_in_list(Piece, [H|List]) :-
   Piece \= H,
   piece_in_list(Piece, List).
 
 
-can_play(_, 196, _, _, Acc, Acc) :- !.
 
-can_play(Board, Count, Player, JList, Acc, Li) :-
-  Count < 196,
-  convertToCoord(CoordX, CoordY, Count),
-  allpiece(Board, 1, CoordX, CoordY, [], Li, JList),
-  append(Acc, Li, NewAcc),
-  NCount is Count + 1,
-  can_play(Board, NCount, Player, JList, NewAcc, Li).
+play_move_ai((X, Y, Piece, Rot), X, Y,Piece, Rot).
 
-allpiece(_, 22, _, _, Acc, Acc, _) :- !.
 
-allpiece(Board,Piece, CoordX, CoordY, Acc, Li, JList) :-
-  Piece < 22,
-  findall((CoordX,CoordY, Piece, Rotation), select_move(Board, Piece, CoordX, CoordY, Player, Rotation, N), L),
-  write(L),
-  append(Acc, L, NewAcc),
-  NPiece is Piece + 1,
-  allpiece(Board, NPiece, CoordX, CoordY, NewAcc, Li, JList).
+% List all the possible move %
 
 p(_, 196, _, _, Acc, Acc) :- !.
 
@@ -131,4 +147,9 @@ p(Board, Count, Player, JList, Acc, L) :-
   NCount is Count + 1,
   p(Board, NCount, Player, JList, L2, L).
 
-list([21,20]).
+tolist((X,Y,Piece,Rot), X,Y,Piece,Rot).
+
+first_elem(Elem, [Elem|_]).
+
+% List of the piece %
+list([21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]).
