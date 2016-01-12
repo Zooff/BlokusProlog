@@ -3,23 +3,33 @@
 % Piece monimo : X %
 %%%%%%%%%%%%%%%%%%%%
 
-select_move(Board, 1, CoordX, CoordY, Player, _, NewBoard) :-
+select_move(Board, 1, CoordX, CoordY, Player, 1, NewBoard) :-
 
-      convertToVal(CoordX, CoordY, Val),
+  convertToVal(CoordX, CoordY, Val),
 
-      (Val - 14 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write('') ),
-      (Val + 14 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write('') ),
-      (Val - 1 >= 0 -> verif_move(Board, 0, Val - 1, Player) ; write('') ),
-      (Val + 1 < 196 -> verif_move(Board, 0, Val + 1, Player) ; write('') ),
+  (Val - 14 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write('') ),
+  (Val + 14 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write('') ),
+  (Val - 1 >= 0 -> verif_move(Board, 0, Val - 1, Player) ; write('') ),
+  (Val + 1 < 196 -> verif_move(Board, 0, Val + 1, Player) ; write('') ),
 
-      ( (Val \= 60 , Val \= 135 ) ->
-        ( verif_move2(Board, 0, Val - 15, Player) ;
-          verif_move2(Board, 0, Val - 13, Player) ;
-          verif_move2(Board, 0, Val + 13, Player) ;
-          verif_move2(Board, 0, Val + 15, Player) )
-        ; write('') ),
+  ( (Val \= 60 , Val \= 135 ) ->
+    ( verif_move2(Board, 0, Val - 15, Player) ;
+      verif_move2(Board, 0, Val - 13, Player) ;
+      verif_move2(Board, 0, Val + 13, Player) ;
+      verif_move2(Board, 0, Val + 15, Player) )
+    ; write('') ),
 
-      change_board(Board, 0, Val, Player, NewBoard).
+  change_board(Board, 0, Val, Player, NewBoard).
+
+select_move(Board, 1, CoordX, CoordY, Player, 2, NewBoard) :-
+  select_move(Board, 1, CoordX, CoordY, Player, 1, NewBoard).
+
+select_move(Board, 1, CoordX, CoordY, Player, 3, NewBoard) :-
+  select_move(Board, 1, CoordX, CoordY, Player, 1, NewBoard).
+
+select_move(Board, 1, CoordX, CoordY, Player, 4, NewBoard) :-
+  select_move(Board, 1, CoordX, CoordY, Player, 1, NewBoard).
+
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1405,6 +1415,7 @@ select_move(Board, 14, CoordX, CoordY, Player, 4, NewBoard) :-
   change_board(Board3, 0, NVal3, Player, Board4),
   change_board(Board4, 0, NVal4, Player, NewBoard).
 
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %
   %    X                   X         %
@@ -1433,7 +1444,7 @@ select_move(Board, 15, CoordX, CoordY, Player, 1, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('')),
   (Val + 28 - 1 < 196 -> verif_move(Board, 0, Val + 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 46, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 163, Val \= 121, Val \= 149) ->
+  ( (Val \= 60, Val \= 59, Val \= 46, Val \= 74, Val \= 32, Val \= 135, Val \= 134, Val \= 107, Val \= 121, Val \= 149) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -1467,7 +1478,7 @@ select_move(Board, 15, CoordX, CoordY, Player, 2, NewBoard) :-
   (Val + 14 - 2 < 196 -> verif_move(Board, 0, Val + 14 - 2, Player) ; write('')),
   (Val + 14 + 1 < 196 0 -> verif_move(Board, 0, Val + 14 + 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 74, Val \= 58, Val \= 135, Val \= 136, Val \= 134, Val \= 133, Val \= 149) ->
+  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 46, Val \= 62, Val \= 135, Val \= 136, Val \= 134, Val \= 137, Val \= 121) ->
     ( verif_move2(Board, 0, Val - 14 - 3, Player);
       verif_move2(Board, 0, Val + 14 - 3, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -1501,7 +1512,7 @@ select_move(Board, 15, CoordX, CoordY, Player, 3, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('')),
   (Val + 28 - 1 < 196  -> verif_move(Board, 0, Val + 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 59, Val \= 46, Val \= 74, Val \= 88, Val \= 135, Val \= 134, Val \= 163, Val \= 121, Val \= 149) ->
+  ( (Val \= 60, Val \= 61, Val \= 46, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 163, Val \= 121, Val \= 149) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 - 2, Player);
@@ -1535,7 +1546,7 @@ select_move(Board, 15, CoordX, CoordY, Player, 4, NewBoard) :-
   (Val + 14 - 2 < 196 -> verif_move(Board, 0, Val + 14 - 2, Player) ; write('')),
   (Val + 14 + 1 < 196 -> verif_move(Board, 0, Val + 14 + 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 46, Val \= 58, Val \= 135, Val \= 136, Val \= 134, Val \= 133, Val \= 121) ->
+  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 74, Val \= 58, Val \= 135, Val \= 136, Val \= 134, Val \= 133, Val \= 149) ->
     ( verif_move2(Board, 0, Val - 14 - 3, Player);
       verif_move2(Board, 0, Val + 14 - 3, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -1578,7 +1589,7 @@ select_move(Board, 16, CoordX, CoordY, Player, 1, NewBoard) :-
   (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('')),
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 46, Val \= 32, Val \= 135, Val \= 136, Val \= 134, Val \= 121, Val \= 107) ->
+  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 134, Val \= 149, Val \= 163) ->
     ( verif_move2(Board, 0, Val - 42 - 1, Player);
       verif_move2(Board, 0, Val - 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -1613,7 +1624,7 @@ select_move(Board, 16, CoordX, CoordY, Player, 2, NewBoard) :-
   (Val + 14 + 1 < 196 -> verif_move(Board, 0, Val + 14 + 1, Player) ; write('')),
   (Val + 14 + 2 < 196 -> verif_move(Board, 0, Val + 14 + 2, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 46, Val \= 74, Val \= 135, Val \= 136, Val \= 137, Val \= 121, Val \= 149) ->
+  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 46, Val \= 74, Val \= 135, Val \= 134, Val \= 133, Val \= 121, Val \= 149) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 3, Player);
@@ -1647,7 +1658,7 @@ select_move(Board, 16, CoordX, CoordY, Player, 3, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('')),
   (Val + 28 - 1 < 196 -> verif_move(Board, 0, Val + 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 134, Val \= 149, Val \= 163) ->
+  ( (Val \= 60, Val \= 61, Val \= 59, Val \= 46, Val \= 32, Val \= 135, Val \= 136, Val \= 134, Val \= 121, Val \= 107) ->
     ( verif_move2(Board, 0, Val + 42 - 1, Player);
       verif_move2(Board, 0, Val + 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -1681,7 +1692,7 @@ select_move(Board, 16, CoordX, CoordY, Player, 4, NewBoard) :-
   (Val + 14 + 1 < 196 -> verif_move(Board, 0, Val + 14 + 1, Player) ; write('')),
   (Val + 14 - 2 < 196 -> verif_move(Board, 0, Val + 14 + 2, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 46, Val \= 74, Val \= 135, Val \= 134, Val \= 133, Val \= 121, Val \= 149) ->
+  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 46, Val \= 74, Val \= 135, Val \= 136, Val \= 137, Val \= 121, Val \= 149) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 - 3, Player);
@@ -1727,7 +1738,7 @@ select_move(Board, 17, CoordX, CoordY, Player, 1, NewBoard) :-
   (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('')),
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 46, Val \= 32, Val \= 135, Val \= 136, Val \= 137, Val \= 121, Val \= 107) ->
+  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 74, Val \= 88, Val \= 135, Val \= 134, Val \= 133, Val \= 149, Val \= 163) ->
     ( verif_move2(Board, 0, Val - 42 - 1, Player);
       verif_move2(Board, 0, Val - 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 3, Player);
@@ -1762,7 +1773,7 @@ select_move(Board, 17, CoordX, CoordY, Player, 2, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('')),
   (Val + 28 - 1 < 196 -> verif_move(Board, 0, Val + 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 137, Val \= 149, Val \= 163) ->
+  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 46, Val \= 32, Val \= 135, Val \= 134, Val \= 133, Val \= 121, Val \= 107) ->
     ( verif_move2(Board, 0, Val + 42 - 1, Player);
       verif_move2(Board, 0, Val + 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 3, Player);
@@ -1796,7 +1807,7 @@ select_move(Board, 17, CoordX, CoordY, Player, 3, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('')),
   (Val + 28 - 1 < 196 -> verif_move(Board, 0, Val + 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 74, Val \= 88, Val \= 135, Val \= 134, Val \= 133, Val \= 149, Val \= 163) ->
+  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 46, Val \= 32, Val \= 135, Val \= 136, Val \= 137, Val \= 121, Val \= 107) ->
     ( verif_move2(Board, 0, Val + 42 - 1, Player);
       verif_move2(Board, 0, Val + 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 - 3, Player);
@@ -1830,7 +1841,7 @@ select_move(Board, 17, CoordX, CoordY, Player, 4, NewBoard) :-
   (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('')),
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('')),
 
-  ( (Val \= 60, Val \= 59, Val \= 58, Val \= 46, Val \= 32, Val \= 135, Val \= 134, Val \= 133, Val \= 121, Val \= 107) ->
+  ( (Val \= 60, Val \= 61, Val \= 62, Val \= 74, Val \= 88, Val \= 135, Val \= 136, Val \= 137, Val \= 149, Val \= 163) ->
     ( verif_move2(Board, 0, Val - 42 - 1, Player);
       verif_move2(Board, 0, Val - 42 + 1, Player);
       verif_move2(Board, 0, Val - 14 - 3, Player);
@@ -1873,7 +1884,7 @@ select_move(Board, 18, CoordX, CoordY, Player, 1, NewBoard) :-
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 61, Val \= 75, Val \= 46, Val \= 45, Val \= 135, Val \= 136, Val \= 150, Val \= 121, Val \= 120) ->
+  ( (Val \= 60, Val \= 59, Val \= 45, Val \= 74, Val \= 75, Val \= 135, Val \= 134, Val \= 120, Val \= 149, Val \= 150) ->
     ( verif_move2(Board, 0, Val + 28, Player);
       verif_move2(Board, 0, Val + 28 + 2, Player);
       verif_move2(Board, 0, Val + 14 - 1, Player);
@@ -1908,7 +1919,7 @@ select_move(Board, 18, CoordX, CoordY, Player, 2, NewBoard) :-
   (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 61, Val \= 74, Val \= 73, Val \= 47, Val \= 135, Val \= 136, Val \= 149, Val \= 148, Val \= 122) ->
+  ( (Val \= 60, Val \= 59, Val \= 46, Val \= 73, Val \= 47, Val \= 135, Val \= 134, Val \= 121, Val \= 148, Val \= 122) ->
     ( verif_move2(Board, 0, Val + 28 - 2, Player);
       verif_move2(Board, 0, Val + 28 + 1, Player);
       verif_move2(Board, 0, Val + 14 + 2, Player);
@@ -1943,7 +1954,7 @@ select_move(Board, 18, CoordX, CoordY, Player, 3, NewBoard) :-
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 59, Val \= 74, Val \= 75, Val \= 45, Val \= 135, Val \= 134, Val \= 139, Val \= 140, Val \= 120) ->
+  ( (Val \= 60, Val \= 61, Val \= 46, Val \= 75, Val \= 45, Val \= 135, Val \= 135, Val \= 121, Val \= 150, Val \= 120) ->
     ( verif_move2(Board, 0, Val + 28, Player);
       verif_move2(Board, 0, Val + 28 - 2, Player);
       verif_move2(Board, 0, Val - 14 + 1, Player);
@@ -1979,7 +1990,7 @@ select_move(Board, 18, CoordX, CoordY, Player, 4, NewBoard) :-
     (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('') ),
 
 
-    ( (Val \= 60, Val \= 59, Val \= 73, Val \= 46, Val \= 47, Val \= 135, Val \= 134, Val \= 148, Val \= 121, Val \= 122) ->
+    ( (Val \= 60, Val \= 61, Val \= 73, Val \= 74, Val \= 47, Val \= 135, Val \= 136, Val \= 148, Val \= 149, Val \= 122) ->
       ( verif_move2(Board, 0, Val + 28 - 2, Player);
         verif_move2(Board, 0, Val + 28, Player);
         verif_move2(Board, 0, Val + 14 + 2, Player);
@@ -2009,10 +2020,10 @@ select_move(Board, 18, CoordX, CoordY, Player, 4, NewBoard) :-
 select_move(Board, 19, CoordX, CoordY, Player, 1, NewBoard) :-
 
   convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX - 2, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
   convertToVal(CoordX - 1, CoordY, NVal2),
   convertToVal(CoordX + 1, CoordY, NVal3),
-  convertToVal(CoordX + 2, CoordY + 1, NVal4),
+  convertToVal(CoordX + 1, CoordY + 1, NVal4),
 
   (Val - 14 >= 0 -> verif_move(Board, 0, Val - 14, Player) ; write('') ),
   (Val + 14 < 196 ->  verif_move(Board, 0, Val + 14, Player) ; write('') ),
@@ -2097,7 +2108,7 @@ select_move(Board, 19, CoordX, CoordY, Player, 4, NewBoard) :-
 select_move(Board, 20, CoordX, CoordY, Player, 1, NewBoard) :-
 
   convertToVal(CoordX, CoordY, Val),
-  convertToVal(CoordX - 2, CoordY - 1, NVal),
+  convertToVal(CoordX - 1, CoordY - 1, NVal),
   convertToVal(CoordX - 1, CoordY, NVal2),
   convertToVal(CoordX + 1, CoordY, NVal3),
   convertToVal(CoordX, CoordY + 1, NVal4),
@@ -2113,7 +2124,7 @@ select_move(Board, 20, CoordX, CoordY, Player, 1, NewBoard) :-
   (Val - 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 - 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 74, Val \= 45, Val \= 135, Val \= 134, Val \= 136, Val \= 149, Val \= 120) ->
+  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 46, Val \= 75, Val \= 135, Val \= 134, Val \= 136, Val \= 121, Val \= 150) ->
     ( verif_move2(Board, 0, Val - 28, Player);
       verif_move2(Board, 0, Val - 26, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -2148,7 +2159,7 @@ select_move(Board, 20, CoordX, CoordY, Player, 2, NewBoard) :-
   (Val - 28 + 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 59, Val \= 46, Val \= 74, Val \= 47, Val \= 135, Val \= 134, Val \= 121, Val \= 149, Val \= 122) ->
+  ( (Val \= 60, Val \= 61, Val \= 46, Val \= 74, Val \= 73, Val \= 135, Val \= 136, Val \= 121, Val \= 149, Val \= 148) ->
     ( verif_move2(Board, 0, Val - 28, Player);
       verif_move2(Board, 0, Val - 26, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -2183,7 +2194,7 @@ select_move(Board, 20, CoordX, CoordY, Player, 3, NewBoard) :-
   (Val + 28 + 1 < 196 -> verif_move(Board, 0, Val + 28 + 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 46, Val \= 75, Val \= 135, Val \= 134, Val \= 136, Val \= 121, Val \= 140) ->
+  ( (Val \= 60, Val \= 59, Val \= 61, Val \= 74, Val \= 45, Val \= 135, Val \= 134, Val \= 136, Val \= 149, Val \= 120) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -2218,7 +2229,7 @@ select_move(Board, 20, CoordX, CoordY, Player, 4, NewBoard) :-
   (Val + 28 - 1 >= 0 -> verif_move(Board, 0, Val - 28 + 1, Player) ; write('') ),
 
 
-  ( (Val \= 60, Val \= 61, Val \= 46, Val \= 74, Val \= 73, Val \= 135, Val \= 134, Val \= 121, Val \= 149, Val \= 148) ->
+  ( (Val \= 60, Val \= 59, Val \= 46, Val \= 74, Val \= 47, Val \= 135, Val \= 134, Val \= 121, Val \= 149, Val \= 122) ->
     ( verif_move2(Board, 0, Val - 28 - 1, Player);
       verif_move2(Board, 0, Val - 28 + 1, Player);
       verif_move2(Board, 0, Val - 14 + 2, Player);
@@ -2286,9 +2297,6 @@ select_move(Board, 21, CoordX, CoordY, Player, 4, NewBoard) :-
   select_move(Board, 21, CoordX, CoordY, Player, 1, NewBoard).
 
 
-% Verify that a piece can be played %
-
-verify_move(Board, Val).
 
 
 % Convert a Coor in a value %
