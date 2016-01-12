@@ -56,7 +56,7 @@ print_all_col([X|L], Indice, Col) :-
 print_all_col([X|L], Indice, Col) :-
   Col < 21,
   X == o,
-  ansi_format(fg(cyan), '~w', [X]),
+  ansi_format([bg(cyan), fg(cyan)], '~w', [X]),
   write(' - '),
   NCol is Col +1,
   print_all_col(L,Indice, NCol).
@@ -64,7 +64,7 @@ print_all_col([X|L], Indice, Col) :-
 print_all_col([X|L], Indice, Col) :-
   Col < 21,
   X == x,
-  ansi_format(fg(red), '~w', [X]),
+  ansi_format([fg(red), bg(red)], '~w', [X]),
   write(' - '),
   NCol is Col +1,
   print_all_col(L,Indice, NCol).
