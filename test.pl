@@ -24,8 +24,8 @@ play_blo(Board, Player, J1List, J2List, Ai) :-
   draw_board(Board),
 
   (Player == x ->
-    p(Board, 0, Player, J1List, [], Li), write(Li);
-    p(Board, 0, Player, J2List, [], Li), write(Li)
+    p(Board, 0, Player, J1List, [], Li);
+    p(Board, 0, Player, J2List, [], Li)
   ),
   repeat,
   (Player == x ->
@@ -82,20 +82,23 @@ ai_move(Board, Player, J1List, J2List, Ai) :-
     p(Board, 0, Player, J2List, [], Li)
   ),
 
-  (Player == x ->
-    first_elem(Piece, J1List);
-    first_elem(Piece, J2List)
-  ),
+  %(Player == x ->
+  %  first_elem(Piece, J1List);
+  %  first_elem(Piece, J2List)
+  %),
 
 %%%%%%%%%% BUG ICI %%%%%%%%%
 
-  first_elem(K, Li),
+  first_elem2(K, Li),
+  write(K),
 
-%  select_move(Board, Piece, X, Y, Player, Rot, NewBoard),
+  play_move_ai(K, X, Y, Piece2, Rot),
+
+  select_move(Board, Piece2, X, Y, Player, Rot, NewBoard),
 
   ( Player == x ->
-      delete_piece(Piece, J1List, NewJ1List), NewJ2List = J2List;
-      delete_piece(Piece, J2List, NewJ2List), NewJ1List = J1List
+      delete_piece(Piece2, J1List, NewJ1List), NewJ2List = J2List;
+      delete_piece(Piece2, J2List, NewJ2List), NewJ1List = J1List
   ),
   invert_player(Player, Player2),
   play_blo(NewBoard, Player2, NewJ1List, NewJ2List, Ai).
@@ -132,7 +135,7 @@ piece_in_list(Piece, [H|List]) :-
 
 
 
-play_move_ai((X, Y, Piece, Rot), X, Y,Piece, Rot).
+play_move_ai([X, Y, Piece, Rot], X, Y,Piece, Rot).
 
 
 % List all the possible move %
@@ -147,9 +150,11 @@ p(Board, Count, Player, JList, Acc, L) :-
   NCount is Count + 1,
   p(Board, NCount, Player, JList, L2, L).
 
-tolist((X,Y,Piece,Rot), X,Y,Piece,Rot).
+tolist([X,Y,Piece,Rot], X,Y,Piece,Rot).
 
 first_elem(Elem, [Elem|_]).
+
+first_elem2([X,Y,Piece,Rot], [(X,Y,Piece,Rot)|_]).
 
 % List of the piece %
 list([21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]).
