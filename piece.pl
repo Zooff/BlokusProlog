@@ -2320,23 +2320,25 @@ convertToCoord(X, Y, Val) :-
 
 % Verify that the case is not a player case %
 
+verif_move([H|_], Val, Val, Player) :-
+  %write(H),nl,
+  H \= Player.
 verif_move([_|R], Count, Val, Player) :-
   Count < Val, !,
   NCount is Count + 1,
   verif_move(R, NCount, Val, Player).
-verif_move([H|_], _, _, Player) :-
-  %write(H),nl,
-  H \= Player.
+
 
  % Verify that the case is a player case %
 
+ verif_move2([H|_], Val, Val, Player) :-
+   %writeln(H),
+   H = Player.
 verif_move2([_|R], Count, Val, Player) :-
   Count < Val, !,
   NCount is Count + 1,
   verif_move2(R, NCount, Val, Player).
-verif_move2([H|_], Count, Val, Player) :-
-  %writeln(H),
-  H = Player.
+
 
 
 % Change one point of the board %
